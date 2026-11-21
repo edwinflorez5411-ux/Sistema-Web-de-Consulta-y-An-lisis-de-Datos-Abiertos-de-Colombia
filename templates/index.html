@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Programas Universitarios - Datos Abiertos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="header-principal">
+        <h1>Sistema de Consulta de Datos Abiertos</h1>
+        <p>Oferta académica obtenida desde datos.gov.co (Recurso: asjg-76ya)</p>
+    </header>
+
+    <main class="container">
+        <form action="{{ url_for('sincronizar') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button type="submit" class="btn btn-primario">Consultar API y guardar datos</button>
+        </form>
+
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% for categoria, mensaje in mensajes %}
+                <div class="alerta {% if categoria == 'error' %}alerta-error{% endif %}">
+                    <strong>{{ categoria | upper }}:</strong> {{ mensaje }}
+                </div>
+            {% endfor %}
+        {% endwith %}
+
+        <section class="resumen-grid">
+            <div class="tarjeta-resumen">
+                <span>Total Programas</span>
+                <strong>{{ resumen.total_programas }}</strong>
+            </div>
+            <div class="tarjeta-resumen">
+                <span>Universidades</span>
+                <strong>{{ resumen.total_universidades }}</strong>
+            </div>
+            <div class="tarjeta-resumen">
+                <span>Ubicaciones</span>
+                <strong>{{ resumen.total_ciudades }}</strong>
+            </div>
+            <div class="tarjeta-resumen">
+                <span>Duración Promedio</span>
+                <strong>{{ resumen.promedio_duracion }}</strong>
+            </div>
+        </section>
+
+        <h2>Registros almacenados</h2>
+        <form action="{{ url_for('inicio') }}" method="GET" class="barra-busqueda">
+            <input type="text" name="q" value="{{ filtro }}"
+                   placeholder="Buscar por universidad, ubicación, programa o modalidad...">
+            <button type="submit" class="btn btn-primario">Buscar</button>
+            <a href="{{ url_for('inicio') }}" class="btn btn-secundario">Limpiar</a>
+        </form>
+
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>SNIES</th>
+                        <th>Universidad</th>
+                        <th>Ubicación</th>
+                        <th>Dirección</th>
+                        <th>Programa</th>
+                        <th>Modalidad</th>
+                        <th>Duración</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fila in registros %}
+                    <tr>
+                        <td>{{ fila.id_api }}</td>
+                        <td>{{ fila.universidad }}</td>
+                        <td>{{ fila.ubicacion }}</td>
+                        <td>{{ fila.direccion }}</td>
+                        <td>{{ fila.programas }}</td>
+                        <td>{{ fila.modalidad }}</td>
+                        <td>{{ fila.duracion }} {{ fila.periodo }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="sin-datos">No hay registros para mostrar.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

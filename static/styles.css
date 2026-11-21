@@ -1,0 +1,202 @@
+/* Variables de color: Tonos azules y blancos */
+:root {
+    --azul-oscuro: #0f294a;
+    --azul-primario: #1d4ed8;
+    --azul-hover: #1e40af;
+    --azul-suave: #eff6ff;
+    --azul-borde: #dbeafe;
+    --fondo-pagina: #f8fafc;
+    --blanco: #ffffff;
+    --texto-principal: #1e293b;
+    --texto-secundario: #64748b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--fondo-pagina);
+    color: var(--texto-principal);
+    line-height: 1.6;
+}
+
+/* Encabezado principal */
+.header-principal {
+    background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-primario));
+    color: var(--blanco);
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(15, 41, 74, 0.15);
+}
+
+.header-principal h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+}
+
+.header-principal p {
+    color: var(--azul-borde);
+    font-size: 0.95rem;
+}
+
+/* Contenedor centrado */
+.container {
+    max-width: 1150px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    padding: 0.65rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primario {
+    background-color: var(--azul-primario);
+    color: var(--blanco);
+}
+
+.btn-primario:hover {
+    background-color: var(--azul-hover);
+}
+
+.btn-secundario {
+    background-color: var(--blanco);
+    color: var(--azul-primario);
+    border: 1px solid var(--azul-primario);
+}
+
+.btn-secundario:hover {
+    background-color: var(--azul-suave);
+}
+
+/* Mensajes Flash (Alertas) */
+.alerta {
+    padding: 0.9rem 1.2rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    border-left: 4px solid var(--azul-primario);
+    background-color: var(--azul-suave);
+    color: var(--azul-oscuro);
+}
+
+.alerta-error {
+    border-left-color: #dc2626;
+    background-color: #fef2f2;
+    color: #991b1b;
+}
+
+/* Tarjetas de Resumen Numérico */
+.resumen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem 0;
+}
+
+.tarjeta-resumen {
+    background-color: var(--blanco);
+    border: 1px solid var(--azul-borde);
+    border-top: 4px solid var(--azul-primario);
+    border-radius: 8px;
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.tarjeta-resumen span {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--texto-secundario);
+    margin-bottom: 0.4rem;
+}
+
+.tarjeta-resumen strong {
+    font-size: 1.7rem;
+    color: var(--azul-oscuro);
+}
+
+/* Barra de búsqueda */
+.barra-busqueda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 1.5rem 0;
+    background-color: var(--blanco);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--azul-borde);
+}
+
+.barra-busqueda input[type="text"] {
+    flex: 1;
+    min-width: 240px;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.barra-busqueda input[type="text"]:focus {
+    border-color: var(--azul-primario);
+    box-shadow: 0 0 0 3px var(--azul-borde);
+}
+
+/* Tabla de registros */
+.tabla-contenedor {
+    background-color: var(--blanco);
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid var(--azul-borde);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.92rem;
+}
+
+thead {
+    background-color: var(--azul-oscuro);
+    color: var(--blanco);
+}
+
+th, td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--azul-borde);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--azul-suave);
+}
+
+tbody tr:hover {
+    background-color: var(--azul-borde);
+}
+
+.sin-datos {
+    text-align: center;
+    padding: 2rem;
+    color: var(--texto-secundario);
+}
